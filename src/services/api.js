@@ -59,7 +59,6 @@ export async function updateTask(taskId) {
     .from("tasks")
     .update({
       completed,
-      completed_at: completed ? new Date().toISOString() : null,
       updated_at: new Date().toISOString(),
     })
     .eq("id", taskId)
@@ -154,11 +153,12 @@ export async function addCheckIn(entry) {
   const payload = {
     user_id: user.id,
     date: new Date().toISOString().split("T")[0],
-    mood: entry.mood_score,
+    mood: entry.mood,
+    mood_score: entry.mood_score,
     energy: entry.energy,
     stress: entry.stress,
-    what_is_on_your_mind: entry.mind,
-    gratitude: entry.gratitude.join(", "),
+    mind: entry.mind,
+    gratitude: entry.gratitude,
   }
 
   // Save or update today's check-in
@@ -226,7 +226,6 @@ export async function updateLifeMetrics(userId, impact) {
     ),
     finance_score: clamp(metrics.finance_score + impact.finance),
 
-    last_activity_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   }
 
