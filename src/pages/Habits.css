@@ -1,0 +1,82 @@
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.habit-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transition: border-color .2s, background .2s;
+}
+
+.habit-card.is-done {
+  border-color: rgba(47, 209, 128, 0.3);
+  background: linear-gradient(180deg, rgba(47, 209, 128, 0.06), var(--bg-card));
+}
+
+.habit-check {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .2s;
+}
+
+.habit-check:not(:disabled):hover {
+  border-color: var(--accent);
+}
+
+.habit-check.checked {
+  background: linear-gradient(135deg, var(--color-fitness), #35D488);
+  border-color: transparent;
+  color: #06180D;
+}
+
+.habit-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.habit-info h3 {
+  font-size: 14.5px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.habit-info p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.habit-area-tag {
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+}
+
+.habit-streak {
+  color: var(--color-warning);
+  font-weight: 700;
+}
+
+.habit-delete {
+  opacity: .55;
+}
+
+.habit-delete:hover {
+  opacity: 1;
+}

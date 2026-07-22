@@ -1,0 +1,105 @@
+:root {
+  /* ===========================
+      APP BACKGROUND
+  ============================ */
+
+  --bg-app: #07080D;
+  --bg-elevated: #11131B;
+  --bg-elevated-2: #171A24;
+  --bg-input: #0E1016;
+
+  --surface-glass: rgba(255,255,255,.03);
+
+  --border-subtle: rgba(255,255,255,.06);
+  --border-strong: rgba(255,255,255,.10);
+
+  /* ===========================
+      TEXT
+  ============================ */
+
+  --text-primary: #F8F9FD;
+  --text-secondary: #A0A5B7;
+  --text-tertiary: #6F7485;
+  --text-inverse: #08090D;
+
+  /* ===========================
+      BRAND
+  ============================ */
+
+  --accent: #4C6FFF;
+  --accent-soft: rgba(76,111,255,.15);
+  --accent-strong: #6D89FF;
+
+  /* ===========================
+      LIFE COLORS
+  ============================ */
+
+  --color-spiritual:#4C6FFF;
+  --color-fitness:#2FD180;
+  --color-career:#9B6BFF;
+  --color-mental:#FFA14C;
+  --color-relationships:#FF5F7F;
+  --color-finance:#F2C94C;
+
+  --color-success:#2FD180;
+  --color-warning:#FFA14C;
+  --color-danger:#FF5F7F;
+  --color-info:#4C6FFF;
+
+  /* ===========================
+      RADII
+  ============================ */
+
+  --radius-sm:12px;
+  --radius-md:18px;
+  --radius-lg:24px;
+  --radius-pill:999px;
+
+  /* ===========================
+      SPACING
+  ============================ */
+
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-8:32px;
+
+  /* ===========================
+      FONTS
+  ============================ */
+
+  --font-display:'Manrope',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+
+  /* ===========================
+      SHADOWS
+  ============================ */
+
+  --shadow-card:
+      0 15px 40px rgba(0,0,0,.45);
+
+  --shadow-pop:
+      0 20px 45px rgba(76,111,255,.20);
+
+  --shadow-inner:
+      inset 0 1px rgba(255,255,255,.04);
+
+  /* ===========================
+      MOTION
+  ============================ */
+
+  --ease-out:cubic-bezier(.16,1,.3,1);
+
+  --dur-fast:140ms;
+  --dur-med:240ms;
+
+  /* ===========================
+      LAYOUT
+  ============================ */
+
+  --app-max-width:480px;
+  --nav-height:76px;
+}

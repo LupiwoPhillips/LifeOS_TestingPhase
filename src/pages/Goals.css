@@ -1,0 +1,80 @@
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.goal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.goal-top h3 {
+  font-size: 15px;
+  font-weight: 700;
+  max-width: 75%;
+}
+
+.goal-pct {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.goal-track {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-elevated-2);
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.goal-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  transition: width 500ms var(--ease-out);
+}
+
+.goal-target {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.goal-area-tag {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.goal-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-3);
+}
+
+.goal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-2);
+}
+
+.goal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn.danger {
+  color: #FF8FA3;
+}
+
+.icon-btn.danger:hover {
+  background: rgba(255, 95, 127, 0.14);
+}

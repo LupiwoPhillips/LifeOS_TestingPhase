@@ -1,0 +1,77 @@
+.profile-row.danger .profile-row-label {
+  color: var(--color-danger);
+}
+
+.settings-note {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.settings-note code {
+  background: var(--bg-elevated-2);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.settings-row + .settings-row {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.settings-value {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.settings-badge {
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(47, 209, 128, 0.12);
+  color: #4EE39B;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.toggle {
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--bg-elevated-2);
+  border: 1px solid var(--border-subtle);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  transition: background .2s, border-color .2s;
+}
+
+.toggle-knob {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  transition: transform .2s, background .2s;
+}
+
+.toggle.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle.on .toggle-knob {
+  transform: translateX(18px);
+  background: white;
+}
+
+.settings-signout {
+  width: 100%;
+}

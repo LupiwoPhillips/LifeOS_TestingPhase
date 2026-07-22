@@ -1,0 +1,99 @@
+.section-heading {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.mood-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mood-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-elevated-2);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast);
+}
+
+.mood-btn.active {
+  background: var(--accent);
+  transform: scale(1.08);
+}
+
+.energy-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) var(--val, 70%), var(--bg-elevated-2) var(--val, 70%));
+  outline: none;
+}
+
+.energy-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--accent);
+  cursor: pointer;
+}
+
+.mind-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+}
+
+.gratitude-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 14px;
+  margin-bottom: var(--space-3);
+}
+
+.add-another-btn {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-strong);
+}
+
+.gratitude-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  color: var(--text-tertiary);
+  font-size: 11.5px;
+  margin-top: 6px;
+}
+
+.add-gratitude-btn {
+  padding-left: 0;
+}

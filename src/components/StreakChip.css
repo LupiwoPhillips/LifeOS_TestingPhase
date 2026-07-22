@@ -1,0 +1,35 @@
+.streak-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.streak-chip:last-child {
+  border-bottom: none;
+}
+
+.streak-icon {
+  font-size: 18px;
+}
+
+.streak-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.streak-days {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-warning);
+}
+
+.streak-chip.is-inactive {
+  opacity: .5;
+}
+
+.streak-chip.is-inactive .streak-days {
+  color: var(--text-tertiary);
+}

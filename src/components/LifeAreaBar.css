@@ -1,0 +1,64 @@
+.life-area-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.life-area-icon {
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.life-area-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.life-area-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.life-area-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.life-area-score {
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.life-area-track {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-elevated-2);
+  overflow: hidden;
+}
+
+.life-area-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 500ms var(--ease-out);
+}
+
+.life-area-delta {
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 40px;
+  text-align: right;
+}
+
+.life-area-delta.up { color: var(--color-success); }
+.life-area-delta.down { color: var(--color-danger); }
