@@ -151,14 +151,20 @@ export async function addCheckIn(entry) {
 
   // Build the payload
   const payload = {
-    user_id: user.id,
-    date: new Date().toISOString().split("T")[0],
-    mood: entry.mood,
-    mood_score: entry.mood_score,
-    energy: entry.energy,
-    stress: entry.stress,
-    mind: entry.mind,
-    gratitude: entry.gratitude,
+  user_id: user.id,
+  date: new Date().toISOString().split("T")[0],
+
+  // Database expects an integer
+  mood: entry.mood_score,
+
+  energy: entry.energy,
+  stress: entry.stress,
+
+  // Correct column name
+  what_is_on_your_mind: entry.mind,
+
+  // Convert array into text
+  gratitude: entry.gratitude.join("\n"),
   }
 
   // Save or update today's check-in

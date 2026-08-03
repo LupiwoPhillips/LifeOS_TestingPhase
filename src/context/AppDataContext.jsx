@@ -10,6 +10,7 @@ import React, {
 import * as api from "../services/api";
 import { loadDashboard } from "../services/dashboardService";
 import { buildAnalytics } from "../services/analyticsService";
+import { supabase } from "../lib/supabase";
 
 import {
   generateHeadlineMessage,
@@ -46,23 +47,25 @@ export function AppDataProvider({ children }) {
 
   const applyDashboard = useCallback((dashboard) => {
     setState({
-      tasks: dashboard.tasks,
-      goals: dashboard.goals,
-      journalEntries: dashboard.journalEntries,
-      checkIns: dashboard.checkIns,
-      streaks: dashboard.streaks,
-      habits: dashboard.habits,
+      tasks: dashboard.tasks ?? [],
+      goals: dashboard.goals ?? [],
+      journalEntries: dashboard.journalEntries ?? [],
+      checkIns: dashboard.checkIns ?? [],
+      streaks: dashboard.streaks ?? [],
+      habits: dashboard.habits ?? [],
       habitLogs: dashboard.habitLogs ?? [],
     });
 
-    setMetrics(dashboard.metrics);
-    setEvents(dashboard.events);
+    setMetrics(dashboard.metrics ?? null);
+    setEvents(dashboard.events ?? []);
   }, []);
 
   const loadEverything = useCallback(async () => {
     try {
       setError(null);
+
       const dashboard = await loadDashboard();
+
       applyDashboard(dashboard);
     } catch (err) {
       console.error(err);
@@ -72,14 +75,74 @@ export function AppDataProvider({ children }) {
     }
   }, [applyDashboard]);
 
+  // =====================================================
+  // Wait for authentication before loading dashboard
+  // =====================================================
+
   useEffect(() => {
-    loadEverything();
+    let mounted = true;
+
+    async function initialize() {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+
+        if (!mounted) return;
+
+        if (session) {
+          await loadEverything();
+        } else {
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error(err);
+
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    initialize();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!mounted) return;
+
+      if (session) {
+        loadEverything();
+      } else {
+        setLoading(false);
+
+        setState({
+          tasks: [],
+          goals: [],
+          journalEntries: [],
+          checkIns: [],
+          streaks: [],
+          habits: [],
+          habitLogs: [],
+        });
+
+        setMetrics(null);
+        setEvents([]);
+      }
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [loadEverything]);
 
   const refreshDashboard = useCallback(async () => {
     try {
       setError(null);
+
       const dashboard = await loadDashboard();
+
       applyDashboard(dashboard);
     } catch (err) {
       console.error(err);
@@ -226,6 +289,7 @@ export function AppDataProvider({ children }) {
 
   const lifeAreas = useMemo(() => {
     if (!metrics) return [];
+
     return LIFE_AREA_META.map((area) => ({
       ...area,
       score: metrics[`${area.id}_score`] ?? 0,
@@ -248,12 +312,6 @@ export function AppDataProvider({ children }) {
   const headline = useMemo(() => {
     return generateHeadlineMessage(state.tasks, nudgeContext);
   }, [state.tasks, nudgeContext]);
-
-  /*
-  =====================================================
-  CENTRAL ANALYTICS ENGINE
-  =====================================================
-  */
 
   const analytics = useMemo(() => {
     return buildAnalytics({

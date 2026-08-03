@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useAppData } from "../context/AppDataContext";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
+import TodayFocus from "../components/home/TodayFocus";
+
 
 import LifeScoreRing from "../components/LifeScoreRing";
 import LifeAreaBar from "../components/LifeAreaBar";
 import StreakChip from "../components/StreakChip";
-import TaskItem from "../components/TaskItem";
 import SmartNudgeCard from "../components/SmartNudgeCard";
 import QuickActionCard from "../components/QuickActionCard";
-import EmptyState from "../components/EmptyState";
 import Modal from "../components/Modal";
 import { FormField, TextInput, Select } from "../components/FormField";
 
@@ -168,35 +168,6 @@ export default function Home() {
             Last updated {metrics.updated_at ? new Date(metrics.updated_at).toLocaleDateString() : "just now"}
           </span>
         </div>
-      </section>
-
-      <section className="card">
-        <div className="card-title-row">
-          <h3>Today's Focus</h3>
-          <span className="link-muted">{completed}/{todayTasks.length}</span>
-        </div>
-
-        {todayTasks.length === 0 ? (
-          <EmptyState
-            icon="🌤️"
-            title="Nothing scheduled for today"
-            message="Add a task to start building today's momentum."
-          />
-        ) : (
-          todayTasks.map((task) => (
-            <TaskItem key={task.id} task={task} onToggle={toggleTask} />
-          ))
-        )}
-
-        {todayTasks.length > 0 && (
-          <div className="focus-progress-track">
-            <div className="focus-progress-fill" style={{ width: `${progressPct}%` }} />
-          </div>
-        )}
-
-        <button className="btn-ghost add-task-btn" onClick={() => setTaskModalOpen(true)}>
-          + Add a task
-        </button>
       </section>
 
       <section className="quick-actions-grid">
