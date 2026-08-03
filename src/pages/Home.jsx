@@ -4,14 +4,14 @@ import { useAppData } from "../context/AppDataContext";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import TodayFocus from "../components/home/TodayFocus";
+import ScoreCard from "../components/home/ScoreCard";
 
-
-import LifeScoreRing from "../components/LifeScoreRing";
 import LifeAreaBar from "../components/LifeAreaBar";
 import StreakChip from "../components/StreakChip";
 import SmartNudgeCard from "../components/SmartNudgeCard";
 import QuickActionCard from "../components/QuickActionCard";
 import Modal from "../components/Modal";
+import EmptyState from "../components/EmptyState";
 import { FormField, TextInput, Select } from "../components/FormField";
 
 import "./Home.css";
@@ -36,6 +36,9 @@ export default function Home() {
     addTask,
     lifeAreas,
     error,
+    previousLifeScore,
+    lifeScoreWeeklyTrend,
+    lifeScoreReason,
   } = useAppData();
 
   const navigate = useNavigate();
@@ -159,16 +162,29 @@ export default function Home() {
         <SmartNudgeCard nudge={topNudge} onResolve={handleResolveNudge} onSnooze={() => setNotifOpen(true)} />
       )}
 
-      <section className="card score-card">
-        <LifeScoreRing score={metrics.overall_score} />
-        <div className="score-text">
-          <span className="score-label">Life Score</span>
-          <span className="score-value">{metrics.overall_score}%</span>
-          <span className="score-hint">
-            Last updated {metrics.updated_at ? new Date(metrics.updated_at).toLocaleDateString() : "just now"}
-          </span>
-        </div>
-      </section>
+      <ScoreCard
+        metrics={metrics}
+        previousScore={previousLifeScore}
+        reason={
+          lifeScoreReason ||
+          `Last updated ${metrics.updated_at ? new Date(metrics.updated_at).toLocaleDateString() : "just now"}`
+        }
+      />
+
+      {lifeScoreWeeklyTrend !== 0 && (
+        <p className="score-trend-line">
+          {lifeScoreWeeklyTrend > 0 ? "📈" : "📉"} {lifeScoreWeeklyTrend > 0 ? "+" : ""}
+          {lifeScoreWeeklyTrend} this week
+        </p>
+      )}
+
+      <TodayFocus
+        tasks={todayTasks}
+        completed={completed}
+        progress={progressPct}
+        onToggleTask={toggleTask}
+        onAddTask={() => setTaskModalOpen(true)}
+      />
 
       <section className="quick-actions-grid">
         <QuickActionCard icon="✅" label="Check-In" sublabel="Daily check-in" to="/check-in" color="var(--color-info)" />

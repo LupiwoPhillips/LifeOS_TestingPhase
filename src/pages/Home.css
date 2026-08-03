@@ -82,6 +82,36 @@
   line-height: 1.4;
 }
 
+.score-value {
+  transition: color 300ms var(--ease-out);
+}
+
+.score-delta {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.score-delta.up {
+  color: var(--color-success, #22c55e);
+  background: color-mix(in srgb, var(--color-success, #22c55e) 14%, transparent);
+}
+
+.score-delta.down {
+  color: var(--color-danger, #ef4444);
+  background: color-mix(in srgb, var(--color-danger, #ef4444) 14%, transparent);
+}
+
+.score-trend-line {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: -8px 0 4px;
+  padding: 0 2px;
+}
+
 .focus-progress-track {
   height: 5px;
   border-radius: var(--radius-pill);

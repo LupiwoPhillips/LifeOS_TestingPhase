@@ -149,22 +149,30 @@ export async function addCheckIn(entry) {
     throw new Error("No authenticated user")
   }
 
-  // Build the payload
+  // Build the payload — field names must match supabase/schema.sql exactly,
+  // or PostgREST throws "Could not find the 'x' column ... in the schema cache".
+  //
+  // daily_checkins columns: mood (text), mood_score (int), energy (int),
+  // stress (int), mind (text), gratitude (text[]).
   const payload = {
-  user_id: user.id,
-  date: new Date().toISOString().split("T")[0],
+    user_id: user.id,
+    date: new Date().toISOString().split("T")[0],
 
-  // Database expects an integer
-  mood: entry.mood_score,
+    // `mood` is the text label (e.g. "good"), `mood_score` is the 0-10 number.
+    // These were previously swapped/misnamed, which is what caused the save
+    // to fail — the payload had no `mind` field at all.
+    mood: entry.mood,
+    mood_score: entry.mood_score,
 
-  energy: entry.energy,
-  stress: entry.stress,
+    energy: entry.energy,
+    stress: entry.stress,
 
-  // Correct column name
-  what_is_on_your_mind: entry.mind,
+    // Column is literally named `mind` in the schema.
+    mind: entry.mind,
 
-  // Convert array into text
-  gratitude: entry.gratitude.join("\n"),
+    // `gratitude` is a Postgres text[] column — send the array as-is,
+    // not a joined string (a string would fail to cast into text[]).
+    gratitude: entry.gratitude,
   }
 
   // Save or update today's check-in

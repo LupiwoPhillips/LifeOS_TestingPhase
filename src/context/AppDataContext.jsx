@@ -17,6 +17,12 @@ import {
   generateNudges,
 } from "../lib/smartReminder";
 
+import {
+  computePreviousScore,
+  computeScoreTrend,
+  describeScoreChange,
+} from "../lib/lifeScore";
+
 const AppDataContext = createContext(null);
 
 const LIFE_AREA_META = [
@@ -296,6 +302,32 @@ export function AppDataProvider({ children }) {
     }));
   }, [metrics]);
 
+  // ---------------------------------------------------------------------
+  // Life Score trend + explanation (Priority 2) — derived from life_events,
+  // so it updates the instant refreshDashboard() runs after any check-in,
+  // journal entry, habit completion, or goal update.
+  // ---------------------------------------------------------------------
+
+  const previousLifeScore = useMemo(
+    () => computePreviousScore(metrics, events),
+    [metrics, events]
+  );
+
+  const lifeScoreWeeklyTrend = useMemo(
+    () => computeScoreTrend(events, 7),
+    [events]
+  );
+
+  const lifeScoreMonthlyTrend = useMemo(
+    () => computeScoreTrend(events, 30),
+    [events]
+  );
+
+  const lifeScoreReason = useMemo(
+    () => describeScoreChange(events),
+    [events]
+  );
+
   const nudgeContext = useMemo(() => {
     return {
       lifeAreas,
@@ -347,6 +379,10 @@ export function AppDataProvider({ children }) {
     analytics,
 
     lifeScore,
+    previousLifeScore,
+    lifeScoreWeeklyTrend,
+    lifeScoreMonthlyTrend,
+    lifeScoreReason,
 
     nudges,
 
