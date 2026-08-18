@@ -3,7 +3,7 @@
 Life OS is a personal growth app designed to help you build a better life,
 not just complete tasks. Instead of a generic red badge when you miss
 something, it reflects on your own progress and writes a short, specific
-message back to you — based on your journal entries, goals, and streaks.
+message back to you, based on your journal entries, goals, and streaks.
 
 Mobile-first, dark by default, backed by Supabase (Postgres + Auth) with
 row-level security so every user only ever sees their own data.
